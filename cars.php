@@ -8,82 +8,50 @@
     <title>Document</title>
 </head>
 <body>
-    <nav>
-    <div class="navbar">
-      <a href="index.html" id="navbrand"> Auto luxe</a>
-      <div class="nav-links">
-        <button> <a href="index.html" >Accueil</a>
-        </button>
-        <button>
-          <a href="cars.html">Cars</a>
-        </button>
-        
-        <button>
-          <a href="index.html#contact">Contact Us</a>
-        </button>
-        
-        <button>
-          <a href="index.html#about">About Us</a>
-        </button>
-        
-        <button>
-          <a href="login.html" >Connexion</a>
-        </button>
-      </div>
-      </div>
-    </nav>
-<div class="container" style="margin-top: 70px; display: flex; align-items: center; flex-direction: row; background-color: #f0f0f0; padding: 20px; border-radius: 10px;">
+    <?php 
+    include("functions.php");
+    include("navbar.php")?>
+
+  <div class="container" style="margin-top: 70px; display: flex; align-items: center; flex-direction: row; background-color: #f0f0f0; padding: 20px; border-radius: 10px;">
     <h1>Cars</h1><br><br>
-      <label style="margin: 5 px;">Enter your country</label> <br>
-        <select name="country" id="country-select">
-            <option value="other">  other</option>
-            <option value="alg">    algeria</option>
-            <option value="sa">     saudi arabia</option>
-            <option value="usa">    usa</option>
+    <form action="cars.php" method="post">
+        <label style="margin: 5 px;">choise your filter</label> <br>
+        
+        <select name="filter_type" id="filter_type" placeholder="none">
+          <?php
+            if(isset($_POST['filter_type']))
+              displayFilterTypes($_POST['filter_type']);
+            else{
+              displayFilterTypes("brand");
+            }
+          ?>
         </select> 
-        <label style="margin-right: 10px;">Enter your country</label> <br>
-        <select name="country" id="country-select">
-            <option value="other">  other</option>
-            <option value="alg">    algeria</option>
-            <option value="sa">     saudi arabia</option>
-            <option value="usa">    usa</option>
-        </select> 
-        <label style="margin-right: 10px;">Enter your country</label> <br>
-        <select name="country" id="country-select">
-            <option value="other">  other</option>
-            <option value="alg">    algeria</option>
-            <option value="sa">     saudi arabia</option>
-            <option value="usa">    usa</option>
-        </select> 
-        <label style="margin-right: 10px;">Enter your country</label> <br>
-        <select name="country" id="country-select">
-            <option value="other">  other</option>
-            <option value="alg">    algeria</option>
-            <option value="sa">     saudi arabia</option>
-            <option value="usa">    usa</option>
-        </select> 
-        <button id="show-cars-btn">Show Cars</button>
+      
+        <?php 
+          if(!empty($_POST['filter_type'])){
+              echo"<label style='margin-right: 10px;'>filter value</label> <br>
+              <select name='filter_value' id='filter_value'>";
+              filter_value($_POST['filter_type']);
+              
+              echo"</select> ";
+          }
+      ?>    
+      <input type="submit" name="submit" id="show-cars-btn">
+      </form>
         <div id="cars-list"></div>      
 </div>
   <section>
-<div class="DEALS">
+        <div class="DEALS">
           <h2>our cars</h2>
-           <div class="car-card">
-             <a href="car_info.html">
-               
-               <div class="car-body">
-                  <img src="images/ibiza.png" alt="Série 5 520i">
-                </div>    
-              <div class="car-meta">
-                <span>📅 2023</span>
-              </div>
-              <div class="car-price">
-                <span class="car-amt">6 200 000</span>
-              </div>
-              <span class="go">Voir Détails →</span>
-              </a>
-            </div>
-            </section>
+          <?php 
+            if(isset($_POST['filter_type']) && isset($_POST['filter_value'])){
+              displayCarsWithFilter($_POST['filter_type'], $_POST['filter_value'], isset($_POST['submit']));
+            }else{
+              displayCarsWithFilter("", "", 0);
+            }
+            
+            ?>
+  </section>
 </body>
    <footer style="background-color: rgb(1, 11, 61);">
     <form  >

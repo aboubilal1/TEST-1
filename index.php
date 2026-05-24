@@ -8,34 +8,12 @@
 </head>
 
 <body>
-  <?php include("functions.php")?>
-  <nav>
-    <div class="navbar">
-      <a href="index.html" id="navbrand"> Auto luxe</a>
-      <div class="nav-links">
-        <button>
-        <a href="index.html" >Accueil</a>
-        </button>
+  <?php 
+    include("functions.php");
+    include("navbar.php")
+  ?>
 
-        <button>
-          <a href="cars.html">Cars</a>
-        </button>
-        
-        <button>
-          <a href="index.html#contact">Contact Us</a>
-        </button>
-        
-        <button>
-          <a href="index.html#about">About Us</a>
-        </button>
-        
-        <button>
-          <a href="login.html" >Connexion</a>
-        </button>
-      </div>
-    </div>
-  </nav>
-    <div class="sifou">
+  <div class="sifou">
        <h3>Ready for a ride</h3>
     </div>  
 

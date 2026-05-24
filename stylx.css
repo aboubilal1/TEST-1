@@ -254,15 +254,12 @@ footer{
   gap: 20px;
   justify-content: center;
   display: flex;
-
 }
 
-.categories h2{
+.categories .h2{
   width: 100%;
   margin-bottom: 20px;
-
 }
-
 
 .category-name{
   margin-left: 3px;

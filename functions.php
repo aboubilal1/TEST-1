@@ -37,9 +37,12 @@
         "</div></div>";
     }
     
+
+
+
     function showCarInfo($id){
         include('database_connection.php');
-        $sql = "select * from car_info where id = {$id}};";
+        $sql = "select * from car_info where id = {$id};";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
         
@@ -119,20 +122,58 @@
             <a href='car_info.php?id={$id}'>
                 <div class='car-card'>
                     <div class='car-body'>
-                    <img src='{$image}' alt='{$used_name}'>
+                        <img src='{$image}' alt='{$used_name}'>
                     </div>
-                <div class='car-meta'>
-                    <span>{$year}</span>
-                </div>
-                <div class='car-price'>
-                    <span class='car-name'>{$used_name}</span><br>
-                    <span class='car-amt'>{$price}</span>
-                </div>
-                    <span class='go'>Voir Détails →</span>
+                    <div class='car-meta'>
+                        <span>{$year}</span>
+                    </div>
+                    <div class='car-price'>
+                        <span class='car-name'>{$used_name}</span><br>
+                        <span class='car-amt'>{$price}</span>
+                    </div>
                 </div>
             </a>";
     }
 
+
+
+
+
+    function displayCarsWithFilter($filter_type, $filter_value, $filter_triger){
+        include('database_connection.php');
+        if(isset($filter_type) && isset($filter_value) && $filter_triger){
+            if($filter_type != 'price'){
+                $sql = "select * from car_info where {$filter_type} = '{$filter_value}'";
+            }else{
+                switch ($filter_value){
+                    case 0:
+                        $sql = "select * from car_info order by value desc";
+                        break;
+                    case 1:
+                        $sql = "select * from car_info order by value asc";
+                        break;
+                    case 2:
+                        $sql = "select * from car_info where value between 10000 and 30000";
+                        break;
+                    case 3:
+                        $sql = "select * from car_info where value between 30000 and 60000";
+                        break;
+                    case 4:
+                        $sql = "select * from car_info where value between 60000 and 90000";
+                        break;
+                    case 5:
+                        $sql = "select * from car_info where value > 90000";
+                        break;
+                }
+            }
+        }else{
+            $sql = "select * from car_info";
+        }
+        $result = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_assoc($result)){
+            displayCar($row);
+        }
+    }
     function showTopCars(){
         include('database_connection.php');
         $sql = "select * from car_info order by sales desc limit 4;";
@@ -147,6 +188,42 @@
             displayCar($row);
         }
         echo"</div></div>";
+    }
+
+
+
+
+
+    function displayFilterTypes($selected_filter_type){
+        $Filter_types = array("brand", "engine_type", "color", "year", "price");        
+        foreach($Filter_types as $FT){
+            echo "<option value='{$FT}' " . ($FT === $selected_filter_type ? 'selected' : '') . ">{$FT}</option>";
+        }
+    }                 
+
+
+    function displayFilterOptions($filter_type){
+        include("database_connection.php");
+        $sql = "select distinct {$filter_type} from car_info";
+        $result = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_assoc($result)){
+            $value = $row[$filter_type];
+            echo"<option value='{$value}'>{$value}</option>";
+        }
+    }
+
+    function filter_value($filter_type){
+        if($filter_type == 'price'){
+            echo"<option value='0'>desc</option>";
+            echo"<option value='1'>asc</option>";
+            echo"<option value='2'>10000 - 30000</option>";
+            echo"<option value='3'>30000 - 60000</option>";
+            echo"<option value='4'>60000 - 90000</option>";
+            echo"<option value='5'>+90000</option>";
+        }
+        else{
+            displayFilterOptions($filter_type);
+        }    
     }
 
 ?>
