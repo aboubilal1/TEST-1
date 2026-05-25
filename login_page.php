@@ -7,10 +7,13 @@
 </head>
 <body> 
     <form action="index.php" method="get">
-        <label for="username">Username:</label>
+        <label>Username:</label>
         <input type="text" name="username" id="username"><br>
-        <label for="password">Password:</label>
+        <label>Password:</label>
         <input type="password" name="password" id="password"><br>
+        <a href="register.php" id= 'register'>
+            <label >register</label><br>
+        </a>
         <input type="submit" value="Login">
     </form>
 </body>

@@ -5,7 +5,7 @@
                 <div calss='h2'>
                     <h2>our Brands</h2>
                 </div>
-                <div>";
+                <div class='brands-i'>";
         foreach($brands as $brand){
             echo"
                 <a href='cars.php?brand={$brand}'>
@@ -19,12 +19,20 @@
     }
     
     function showCategories(){
-        $categories = array("Coupe", "Hatchback", "Pickup", "Sedan", "SUV");
+        // to create an array of avilable categories
+        include("database_connection.php");
+        $sql = "select distinct category from car_info;";
+        $result = mysqli_query($conn, $sql);    
+        $categories = array();
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($categories, $row['category']);
+        }
+
         echo "<div class='categories'>
                 <div calss='h2'>
                     <h2>our categories</h2>
                 </div>
-                <div>";
+                <div class='category-1'>";
         foreach($categories as $category){
             echo"
                 <a href='cars.php?&category={$category}'>
@@ -34,7 +42,7 @@
                 </a>
             ";
         }
-        "</div></div>";
+        echo"</div></div>";
     }
     
 
@@ -125,12 +133,15 @@
                         <img src='{$image}' alt='{$used_name}'>
                     </div>
                     <div class='car-meta'>
-                        <span>{$year}</span>
+                    <div class='car-meta-i'>
+                        <span   class='car-name'>{$used_name}</span>
+                        <span   class='car-year'>{$year}</span>
                     </div>
                     <div class='car-price'>
-                        <span class='car-name'>{$used_name}</span><br>
                         <span class='car-amt'>{$price}</span>
                     </div>
+                </div>
+                <span class='go'>see more</span>
                 </div>
             </a>";
     }
@@ -141,7 +152,7 @@
 
     function displayCarsWithFilter($filter_type, $filter_value, $filter_triger){
         include('database_connection.php');
-        if(isset($filter_type) && isset($filter_value) && $filter_triger){
+        if(isset($filter_type) && $filter_type != 'none' && isset($filter_value) && $filter_triger){
             if($filter_type != 'price'){
                 $sql = "select * from car_info where {$filter_type} = '{$filter_value}'";
             }else{
@@ -164,6 +175,8 @@
                     case 5:
                         $sql = "select * from car_info where value > 90000";
                         break;
+                    default:
+                        $sql = "select * from car_info";
                 }
             }
         }else{
@@ -195,35 +208,46 @@
 
 
     function displayFilterTypes($selected_filter_type){
-        $Filter_types = array("brand", "engine_type", "color", "year", "price");        
+        $Filter_types = array("none", "brand", "category", "engine_type", "color", "year", "price");        
         foreach($Filter_types as $FT){
-            echo "<option value='{$FT}' " . ($FT === $selected_filter_type ? 'selected' : '') . ">{$FT}</option>";
+            echo "<option value='{$FT}' " . ($FT === $selected_filter_type ? 'selected' : '') . ">
+                {$FT}
+            </option>";
         }
     }                 
 
 
-    function displayFilterOptions($filter_type){
+    function displayFilterOptions($filter_type, $selected_filter_type){
         include("database_connection.php");
         $sql = "select distinct {$filter_type} from car_info";
         $result = mysqli_query($conn, $sql);
         while($row = mysqli_fetch_assoc($result)){
             $value = $row[$filter_type];
-            echo"<option value='{$value}'>{$value}</option>";
+            echo"<option value='{$value}' " . ($value === $selected_filter_type ? 'selected' : '') . ">
+                {$value}
+            </option>";
         }
     }
 
-    function filter_value($filter_type){
-        if($filter_type == 'price'){
-            echo"<option value='0'>desc</option>";
-            echo"<option value='1'>asc</option>";
-            echo"<option value='2'>10000 - 30000</option>";
-            echo"<option value='3'>30000 - 60000</option>";
-            echo"<option value='4'>60000 - 90000</option>";
-            echo"<option value='5'>+90000</option>";
+    function filter_value($filter_type, $selected_filter_type){
+        if($filter_type != "none"){
+            echo"<label style='margin-right: 10px;'>filter value</label> <br>
+                <select name='filter_value' id='filter_value'>";
+            if($filter_type == 'price'){
+                
+                $ranges = array("desc" ,"asc", "10000 - 30000", "30000 - 60000", "60000 - 90000", "90000 +");
+                for($i = 0; $i < count($ranges); $i++){
+                    echo"<option value='{$i}'" . ((string)$i === (string)$selected_filter_type ? 'selected' : '') .">
+                        {$ranges[$i]}
+                    </option>";
+                }
+                
+            }
+            else{
+                displayFilterOptions($filter_type, $selected_filter_type);
+            }    
+            echo"</select> ";
         }
-        else{
-            displayFilterOptions($filter_type);
-        }    
     }
 
 ?>
