@@ -259,7 +259,7 @@ div .car-card:hover {
 
 /* === FOOTER === */
 footer {
-  background-color: #ffffff;
+  color: #0f1016;
   border-top: 1px solid rgba(7, 26, 57, 0.15);
   color: #e8e8e8;
   padding: 20px;
@@ -333,25 +333,52 @@ form input[type="submit"]:hover { background-color: #2563eb; }
  /* =========== cars.php ============= */
  
  .filter{
-  background-color : #505258;
+  background-image: url(images/background2.png);
+  height: 500px;
   border-radius : 12px;
   margin: 4px;
   padding: 15px;
   margin-top: 73px;
 }
+ #fm{
+   background-color: #00000000;
+   border-radius: 0%;
+   border: #00000000;
+
+ }
+h1{
+    font-family: "Anton SC", sans-serif;
+  font-weight: 400;
+  font-size: 75px;
+  text-align: center;
+  margin-bottom: 30Px;
+  font-style: normal;
+}
 .label-body{
+ display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border-radius: 12px;
+    width: 100%;
+    align-items: center;
+    padding: 15px;
+    background-color: #1b2026;
+    border: 3px solid rgb(107 108 111 / 15%);
+    gap: 10px;
+    box-sizing: border-box;
+}
+.label-i, .label-i2 {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 20px;
-  width: 100%;
-  box-sizing: border-box;
+  align-items: center;
+  gap: 8px;
 }
-.label-i{
-background-color: #373b49;
-width: 150%;
+label{
+  background-color: #00000000;
+    font-size: larger;
+    font-family: math;
+    padding-right: 15px;
 }
+
 #show-cars-btn{
   background-color: #2563eb;
   text-decoration: none;
@@ -360,6 +387,9 @@ width: 150%;
   border: 2px;
 }
 .label-i select{
-  background-color: #1a223b;
+      text-align: center;
+    padding: 3px;
+    border-radius: 7px;
+        background-color: #757781;
 }
  

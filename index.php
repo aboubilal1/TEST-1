@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="stylx.css?v=1"> 
-  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Climate+Crisis:YEAR@1979&display=swap" rel="stylesheet"
 </head>
 
 <body>
@@ -46,7 +49,7 @@
  
 </body>
 
-<footer style="background-color: rgb(1, 11, 61);">
+<footer>
   <form>
     <h3 style="color: rgb(77, 133, 182);">Envoyez-nous un message  </h3>
     <input type="text" placeholder="Votre nom">
@@ -62,9 +65,6 @@
     <p> Horaires :  09h00 – 18h00</p>
   </div>
   
-  <div style="color: aliceblue; text-align: center">
-    &copy; 2026 Golden Auto — Tous droits réservés
-  </div>
   <div style="color: aliceblue; text-align: center">
     &copy; 2026  Auto luxe project 
   </div>

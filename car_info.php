@@ -83,7 +83,7 @@
             </div>
         </section>
 
-           <footer style="background-color: rgb(1, 11, 61);">
+           <footer>
     <form  >
       <h3 style="color: rgb(77, 133, 182);">Envoyez-nous un message  </h3>
       <input type="text" placeholder="Votre nom">
