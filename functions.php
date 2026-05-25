@@ -117,10 +117,11 @@
         $conn->close();
     }
 
+    
     function displayCar($row){
         $id         = $row['id'];
         $used_name  = $row['brand'] . ' ' . $row['name'];
-        $image      = "image/" . $row['image'];
+        $image      = "images/cars/" . $row['image'];
         $year       = $row['year'];
         $price      = number_format($row['value']);
         $brand      = $row['brand'];
@@ -146,6 +147,19 @@
             </a>";
     }
 
+    function displaySimilarCars($id){
+        include('database_connection.php');
+        $sql = "select * from car_info
+                    where brand = (select brand from car_info where id = {$id})
+                    order by value desc
+                    limit 4;";
+        $result = mysqli_query($conn, $sql);
+        
+        while($row = mysqli_fetch_assoc($result)){
+            displayCar($row);
+        }
+       
+    }
 
 
 
