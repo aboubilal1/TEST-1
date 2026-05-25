@@ -16,70 +16,7 @@
         <section style="clear: both; margin-top: 50px;">
             <div class="saimilaire">
             <h2>Meilleures Offresaimilaire</h2>
-             <div class="car-card">
-            <a href="car_info.html">
-              <div class="car-body">
-              <img src="images/ibiza.png" alt="">
-              </div>    
-            <div class="car-meta">
-
-              <span> 2023</span>
-            </div>
-            <div class="car-price">
-              <span class="car-name">ibiza</span><br>
-              <span class="car-amt">6 200 000</span>
-            </div>
-            <span class="go">Voir Détails →</span>
-            </a>
-          </div>
-           <div class="car-card">
-            <a href="car_info.html">
-              <div class="car-body">
-              <img src="images/ibiza.png" alt="">
-              </div>    
-            <div class="car-meta">
-
-              <span> 2023</span>
-            </div>
-            <div class="car-price">
-              <span class="car-name">ibiza</span><br>
-              <span class="car-amt">6 200 000</span>
-            </div>
-            <span class="go">Voir Détails →</span>
-            </a>
-          </div>
-           <div class="car-card">
-            <a href="car_info.html">
-              <div class="car-body">
-              <img src="images/ibiza.png" alt="">
-              </div>    
-            <div class="car-meta">
-
-              <span> 2023</span>
-            </div>
-            <div class="car-price">
-              <span class="car-name">ibiza</span><br>
-              <span class="car-amt">6 200 000</span>
-            </div>
-            <span class="go">Voir Détails →</span>
-            </a>
-          </div>
-           <div class="car-card">
-            <a href="car_info.html">
-              <div class="car-body">
-              <img src="images/ibiza.png" alt="">
-              </div>    
-            <div class="car-meta">
-
-              <span> 2023</span>
-            </div>
-            <div class="car-price">
-              <span class="car-name">ibiza</span><br>
-              <span class="car-amt">6 200 000</span>
-            </div>
-            <span class="go">Voir Détails →</span>
-            </a>
-          </div>
+              <?php displaySimilarCars($_GET['id']); ?>
             </div>
         </section>
 
