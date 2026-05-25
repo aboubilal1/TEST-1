@@ -245,8 +245,8 @@
 
     function filter_value($filter_type, $selected_filter_type){
         if($filter_type != "none"){
-            echo"<label style='margin-right: 10px;'>filter value</label> <br>
-                <select name='filter_value' id='filter_value'>";
+            echo"<label>filter value</label> <br>
+                <select name='filter_value' id='filter_type'>";
             if($filter_type == 'price'){
                 
                 $ranges = array("desc" ,"asc", "10000 - 30000", "30000 - 60000", "60000 - 90000", "90000 +");
