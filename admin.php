@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,39 +8,64 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Climate+Crisis:YEAR@1979&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link href="https://fonts.googleapis.com/css2?family=Goblin+One&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <?php 
+     <?php 
     include("functions.php");
-    include("navbar.php")
-  ?>
+    include("navbar.php")?>
+    <section id='od-sec'>
+        <h1> welcome admin </h1>
+    </section>
+    <section>
+         <div id='dash-adm'>
+         
+          <h1> dashboard </h1>
+          ,   <p>80+ modele</p>
+          
+                    <p>120+ buy</p>
 
-<section id='od-sec'>
-<h1> Your orders captain</h1>
-</section>
- 
-<section>
+                              <p>140+ cars</p>
+
+                                    
+
+
+
+        </div>
+        
+    </section>
+
+    <section>
   <div id='od-card'>
     <div id='od-body'>
-      <img src="images/ibiza.png" alt="">
+      
     </div>
     <div id='od-text'>
-      <div id='od-name'>
-      <h1> seat ibiaz </h1>
+      <div id='adm-txt'>
+      <h1> add car </h1>
       <div>  
 </div>
-      <div id='od-meta'>
+      <div id='ad-meta'>
+      <form action="">
         
-        <span> qte  </span>
-        <span> prix</span>
-        <span id='btn-con'>conferm it <i class="fa fa-check-square" aria-hidden="true"></i></span>
-        <span id='btn-del'>delte it <i class="fa fa-trash" aria-hidden="true"></i></span>
+          
+      
+      
+      
+      
+      </form>
+    
       </div>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
 <footer>
     <form  >
       <h3 style="color: rgb(77, 133, 182);">Envoyez-nous un message  </h3>
@@ -57,10 +82,3 @@
     <p> Horaires :  09h00 – 18h00</p>
   </div>
   
-  <div style="color: aliceblue; text-align: center">
-    &copy; 2026  Auto luxe project 
-  </div>
-  </body>
-  </html>
-
- 

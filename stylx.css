@@ -351,8 +351,8 @@ form input[type="submit"]:hover { background-color: #2250b5; }
    border-radius: 0%;
    border: #00000000;
 
- }
-h1{
+ } 
+.filter h1{
     font-family: "Anton SC", sans-serif;
   font-weight: 400;
   font-size: 75px;
@@ -535,9 +535,7 @@ td {
     border-radius: 7px;
     background-color: #757781;
 }
-#btn{
 
-}
 #btn:hover{
  transform: translateY(-3px);
 }
@@ -546,22 +544,86 @@ td {
 
 #od-sec{
   margin-top: 80px;
+  margin-bottom: 20px;
+  border-radius: 270px;
 }
-#od-sp{
-  
-background-color: #0e25a5;
+
+#od-sec h1{
+font-family: 'Anton SC';
+    margin: 0px;
+    text-align: center;
+    font-size: 64px;
+    letter-spacing: 10%;
 }
 #od-card{
- height: 70%;
-  width: 100%;
-  background-color: #1a1d27;
+display: flex;
+height: 200px;
+border-radius: 5px;
+gap: 12px;
+    BACKGROUND: #272b38;
 }
+
 
 #od-body img{
 width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
 }
 
+#od-name {
+ font-family: "Anton SC", sans-serif;
+     letter-spacing: 2px;
+  margin :0px;
+   justify-content: flex-start;
+  font-size: 20px;
+}
+#od-meta{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+  padding-left:19px ;
+}
+.fa-check-square{
+  color: green;
+}
+.fa-trash{
+  color: rgb(72, 15, 15);
+} 
+#od-meta span{
+  background-color:#333641;
+  border-radius: 6px ;
+  width: 150PX;
+  padding-left: 4PX;
+}
+
+#btn-con:hover{
+  background-color: #054f10;
+  color: #ffffff;
+  border-color: #3b82f6;
+transform: scale(1.05);
+}
+#btn-del:hover{
+  background-color: #810e0e;
+  color: #ffffff;
+  border-color: #3b82f6;
+transform: scale(1.05);
+}
+/*==================admin============*/
+#adm-txt{
+  background-color: #1a223b;
+}
+#dash-adm{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+#dash-adm h1{
+  background-color: #373d44;
+  width: 360px;
+  border-radius: 3px;
+  font-size: 70px;
+  text-align: center;
+}
 

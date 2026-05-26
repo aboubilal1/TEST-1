@@ -32,5 +32,7 @@
             Don't have an account? <a href="register.php">Register here</a>.
         </div>
 </section>
+ 
 </body>
+
 </html>
