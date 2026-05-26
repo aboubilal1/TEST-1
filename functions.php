@@ -47,6 +47,15 @@
     
 
 
+    function addCarToCart($id, $user_id, $quantity){
+        include("database_connection.php");
+        $sql = "insert into orders (user_id, car_id, quantity) values ({$user_id}, {$id}, {$quantity});";
+        mysqli_query($conn, $sql);
+        $quantity = (int)$quantity;
+        $sql = "update car_info set quantity = quantity - {$quantity} where id = {$id} ;";
+        mysqli_query($conn, $sql);
+    }
+
 
     function showCarInfo($id){
         include('database_connection.php');
@@ -55,7 +64,7 @@
         $row = mysqli_fetch_assoc($result);
         
         $used_name      = $row['brand'] .' ' . $row['name'];
-        $image          = "image/" . $row['image'];
+        $image          = "images/cars" . $row['image'];
         $description    = $row['description'];
         $color          = $row['color'];
         $brand          = $row['brand'];
@@ -64,6 +73,28 @@
         $modle          = $row['modle'];
         $year           = $row['year'];
         $price          = number_format($row['value']);
+        $quantity       = $row['quantity'];
+        if(!isset($_SESSION)){
+            session_start();
+        }
+        if(isset($_POST['add']) || isset($_POST['buy'])){
+            if(isset($_SESSION['user_data'])){
+                $user_id = $_SESSION['user_data']['userID'];
+                if(isset($_POST['quantity'])){
+                    addCarToCart($id, $user_id, $_POST['quantity']);
+                    $_POST = array();
+                }
+                if(isset($_POST['buy'])){
+                    header("Location: order.php");
+                    exit();
+                }
+            }else{
+                header("Location: login_page.php");
+                exit();
+            }
+        }
+
+
         echo"
             <div>
                 <div class='car-info-img' style='float: left; width: 30%; padding: 50px;'>
@@ -75,44 +106,51 @@
 
 
                     <div class='car-info-details' style='float: right; margin: 80px;'>
-                    <table style='width: 100% ;'>
+                    <table style='width: 100% ; border-radius: 10px'>
                         <tr>
-                            <th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Caractéristique</th>
-                            <th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Détails</th>
+                            <th>Caractéristique</th>
+                            <th>Détails</th>
                         </tr>
                         <tr>
-                            <td style='border: 1px solid #ddd; padding: 8px;'>Moteur</td>
-                            <td style='border: 1px solid #ddd; padding: 8px;'>V6 biturbo de 3,5 litres</td>
+                            <td>Moteur</td>
+                            <td>V6 biturbo de 3,5 litres</td>
                         </tr>
                         <tr>
-                            <td style='border: 1px solid #ddd; padding: 8px;'>color</td>
-                            <td style='border: 1px solid #ddd; padding: 8px;'>{$color}</td>
+                            <td>color</td>
+                            <td>{$color}</td>
                         </tr>
                         <tr>
-                            <td style='border: 1px solid #ddd; padding: 8px;'>brand</td>
-                            <td style='border: 1px solid #ddd; padding: 8px;'>{$brand}</td>
+                            <td>brand</td>
+                            <td>{$brand}</td>
                         </tr>
                         <tr>
-                            <td style='border: 1px solid #ddd; padding: 8px;'>category</td>
-                            <td style='border: 1px solid #ddd; padding: 8px;'>{$category}</td>
+                            <td>category</td>
+                            <td>{$category}</td>
                         </tr>
                         <tr>
-                            <td style='border: 1px solid #ddd; padding: 8px;'>carburant</td>
-                            <td style='border: 1px solid #ddd; padding: 8px;'>Essence</td>
+                            <td>carburant</td>
+                            <td>Essence</td>
                         </tr>
                         <tr>
-                            <td style='border: 1px solid #ddd; padding: 8px;'>Prix</td>
-                            <td style='border: 1px solid #ddd; padding: 8px;'>{$price}</td>
+                            <td>Prix</td>
+                            <td>{$price}</td>
                         </tr>
                     </table>
+
+
                     <div class='car-actions' style='margin-top: 20px;'>
-                        qte: <input type='number' value='1' min='1' style='width: 60px; padding: 5px; margin-right: 10px;'>
-                        <button style='padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;'>Ajouter au Panier</button>
-                        <button style='padding: 10px 20px; background-color: #28A745; color: white; border: none; border-radius: 5px; cursor: pointer;'>Acheter Maintenant</button>
+                        <form action='car_info.php?id={$id}' method='post'>
+                            <p>qte:{$quantity}</p>
+                            <input type='number' name='quantity' value='0' min='1' max='{$quantity}' id='quantity'>
+                            <input type='submit' name='add' value='Ajouter au Panier' style='padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;' id='btn'>
+                            <input type='submit' name='buy' value='Acheter Maintenant' style='padding: 10px 20px; background-color: #28A745; color: white; border: none; border-radius: 5px; cursor: pointer;' id='btn'>
+                        </form>
+                        <div id= 'register-link'>
+                        </div>
                     </div>
                 </div>
-            </div>";
-        
+            </div>
+        ";
         
         $conn->close();
     }
@@ -245,8 +283,8 @@
 
     function filter_value($filter_type, $selected_filter_type){
         if($filter_type != "none"){
-            echo"<label style='margin-right: 10px;'>filter value</label> <br>
-                <select name='filter_value' id='filter_value'>";
+            echo"<label>filter value</label> <br>
+                <select name='filter_value' id='filter_type'>";
             if($filter_type == 'price'){
                 
                 $ranges = array("desc" ,"asc", "10000 - 30000", "30000 - 60000", "60000 - 90000", "90000 +");
@@ -262,6 +300,118 @@
             }    
             echo"</select> ";
         }
+    }
+
+
+
+
+    function loginID($username, $password){
+        include("database_connection.php");
+        $id = -1;
+        $username = stripslashes(trim(htmlspecialchars($username)));
+        $password = hash('sha256',$password);
+
+        $sql = "select id, user_name, password from users_data ;";
+        $result = mysqli_query($conn, $sql);
+
+        while($row = mysqli_fetch_assoc($result)){
+            if($username == $row['user_name'] && $password == $row['password']){
+                $id = $row['id'];
+            }
+        }
+        return $id;
+    }
+
+    function registerUser($username, $firstname, $lastname, $birtheday, $country, $email, $password, $confirm_password){
+        include("database_connection.php");
+        $sql = "select * from users_data;";
+        $result = mysqli_query($conn, $sql);
+        $errors = array("exist" => 0, "birtheday" => 0, "password" => 0);
+        //user informations
+        $username =         stripslashes(trim(htmlspecialchars($username)));
+        $firstname =        stripslashes(trim(htmlspecialchars($firstname)));
+        $lastname =         stripslashes(trim(htmlspecialchars($lastname)));
+        $email =            stripslashes(trim(htmlspecialchars($email)));
+        $password =         hash('sha256',$password);
+        $confirm_password = hash('sha256',$confirm_password);
+        if (date('d-m-Y') <= $birtheday){
+            $errors['birtheday'] = 1;
+            return $errors;
+        }
+        
+        while($row = mysqli_fetch_assoc($result)){
+            if ($row['email'] == $email || $row['user_name'] == $username) {
+                $errors['exist'] = 1;
+                break;
+            }
+        }
+        if(!$errors['exist']){
+            if($password != $confirm_password){
+                $errors['password'] = 1;
+            }else{
+                $sql = "insert into users_data(user_name, first_name, last_name, birtheday, country, email, password) values('$username', '$firstname', '$lastname', '$birtheday', '$country', '$email', '$password');";
+                mysqli_query($conn, $sql);
+                header("Location: login_page.php");
+                exit();
+                 
+            }
+        }
+        return $errors;
+    }
+
+
+
+    function displayOrders($id){
+        include("database_connection.php");
+        $sql = "select * from orders where user_id = {$id} and done = 0;";
+        $result = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_assoc($result)){
+            $sql = "select * from car_info where id = {$row['car_id']};";
+            $row2 = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+            $used_name  = $row2['brand'] . ' ' . $row2['name'];
+            $image      = "images/cars/" . $row2['image'];
+            $year       = $row2['year'];
+            $price      = number_format($row2['value']);
+            $brand      = $row2['brand'];
+            $category   = $row2['category'];
+            $modle      = $row2['modle'];
+            echo"
+            <div id='od-card'>
+                <div id='od-body'>
+                    <img src='{$image}' alt='{$used_name}'>
+                </div>
+                <div id='od-text'>
+                    <div id='od-name'>
+                        <h1> {$used_name} </h1>
+                        <div id='od-meta'>
+                            <span> qte :{$row['quantity']} </span>
+                            <span> prix : {$price}</span>
+                            <form action='order.php' method='post'>
+                                <input type='submit' name='confirm{$row['id']}' id='btn-con' value='conferm it'>
+                                <input type='submit' name='delete{$row['id']}' id='btn-del' value='delte it'>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ";
+        }
+        
+    }
+
+    function confirmOrder($orderID){
+        include("database_connection.php");
+        $sql = "update orders set done = 1 where id = {$orderID};";
+        mysqli_query($conn, $sql);
+    }
+    function deleteOrder($orderID){
+        include("database_connection.php");
+        $sql = "select * from orders where id = {$orderID};";
+        $row = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+        $sql = "delete from orders where id = {$orderID};";
+        mysqli_query($conn, $sql);
+        $sql = "update car_info set quantity = quantity + {$row['quantity']} where id = {$row['car_id']};";
+        mysqli_query($conn, $sql);
     }
 
 ?>

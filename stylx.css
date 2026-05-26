@@ -83,21 +83,27 @@ h2 {
   BACKGROUND-COLOR: #373b49;
   border-radius : 60PX;
   width : 40%;
+  font-weight: 100;
   margin: 0 auto;
 }
 
 /* === HERO === */
 .sifou {
-  background-image: url(images/main_img.png);
-  height: 500px;
-  font-size: 59px;
-  font-family: 'Permanent Marker', cursive;
-  color: #23457e;
-  text-align: center;
+  background-image:url(images/showroom.jpg);
+  height: 530px;
   background-size: cover;
   background-position: center;
 }
 
+.sifou h3{
+   -webkit-text-stroke: 0.2px rgba(0, 0, 0, 0.993);
+   font-family: 'Permanent Marker', cursive;
+  color: #ffffff;
+  text-align: center;
+   margin: 0%;
+   padding-top: 156px;
+   font-size: 120px;
+}
 /* === CAR CARDS === */
 div .car-card {
   width: 23%;
@@ -282,7 +288,10 @@ form {
 form h3 { color: #3b82f6; }
 
 form input[type="text"],
-form input[type="email"] {
+form input[type="password"],
+form input[type="date"],
+form select,
+form input[type="email"]{
   padding: 9px 14px;
   border-radius: 8px;
   border: 1px solid rgba(59,130,246,0.3);
@@ -308,7 +317,7 @@ form input[type="submit"] {
   transition: background-color 0.2s;
 }
 
-form input[type="submit"]:hover { background-color: #2563eb; }
+form input[type="submit"]:hover { background-color: #2250b5; }
 
 .contact {
   display: flex;
@@ -344,9 +353,8 @@ form input[type="submit"]:hover { background-color: #2563eb; }
    background-color: #00000000;
    border-radius: 0%;
    border: #00000000;
-
  }
-h1{
+.filter h1{
     font-family: "Anton SC", sans-serif;
   font-weight: 400;
   font-size: 75px;
@@ -386,10 +394,234 @@ label{
   border: #1b5dca;
   border: 2px;
 }
-.label-i select{
-      text-align: center;
+#filter_type {
+  text-align: center;
     padding: 3px;
     border-radius: 7px;
         background-color: #757781;
 }
  
+/* ============ login ==============*/
+#log-body{
+  background-color: linear-gradient(90deg, #1a1d27, #91a1db);
+  display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+}
+#log-form{
+  display: block;
+  background-color: #272932;
+  text-align: center;
+}
+#log-sec{
+  font-size: 40px ;
+  font-weight: 400;
+  text-align: center;
+  margin: 0;
+  padding: 30px;
+  font-family: 'verdana', sans-serif;
+}
+.log-user{
+    display: flex;
+    margin-bottom: 7px;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+.log-user input {
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(59,130,246,0.3);
+  background-color: #0f1117;
+  color: #ffffff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+#register-link {
+  margin-top: 15px;
+  color: #94a3b8;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding-left: 3%;
+}
+#register-link a {
+  color: #3b82f6;
+  text-decoration: none; 
+}
+#register-link a:hover {
+  text-decoration: underline;
+}
+
+
+#reg-form{
+  display: block;
+  background-color: #272932;
+  text-align: center;
+  padding: 20px;
+}
+#reg-input{
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(59,130,246,0.3);
+  background-color: #0f1117;
+  color: #ffffff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+#reg-btn{
+  background-color: #1b5dca;
+  color: #ffffff;
+  border-radius: 9px;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+
+#reg-btn a {
+  padding: 9px 22px;
+  border-radius: 8px;
+  border: none;
+  background-color: #1b5dca;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: system-ui;
+  transition: background-color 0.2s;
+}
+#reg-btn a:hover {
+  background-color: #283757;
+ transform: translateY(-5px);
+}
+
+form label {
+  color: #94a3b8;
+  font-family: 'verdana', sans-serif;
+  padding-right: 15px;
+}
+/* ============ car info ====== */
+
+table  {  
+  width: 100%;
+  border-collapse: collapse;
+  border: #00000000;
+  background-color: #1a1d27;
+  border-radius: 12px;
+  font-family: 'verdana', sans-serif;
+
+}
+th {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(22, 29, 41, 0.15);
+  background-color: #2d2f4a;
+}
+td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(59,130,246,0.15);
+  background-color: #1c1e28;
+}
+.car-info-img h1{
+  font-family: "Anton SC", sans-serif;
+  justify-content: left;
+  font-weight: 400;
+  font-size: 30px;
+  text-align: left;
+    margin: 0;
+    padding: 30px;
+  font-style: normal;
+}
+#quantity{
+  text-align: center;
+    padding: 3px;
+    border-radius: 7px;
+    background-color: #757781;
+}
+
+#btn:hover{
+ transform: translateY(-3px);
+}
+
+/* ========= orders =======*/
+
+#od-sec{
+  margin-top: 80px;
+  margin-bottom: 20px;
+  border-radius: 270px;
+}
+#od-sec h1{
+font-family: 'Anton SC';
+    margin: 0px;
+    text-align: center;
+    font-size: 64px;
+    letter-spacing: 10%;
+}
+#od-card{
+display: flex;
+height: 200px;
+border-radius: 5px;
+gap: 12px;
+    BACKGROUND: #272b38;
+  }
+
+#od-body img{
+width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#od-name {
+ font-family: "Anton SC", sans-serif;
+     letter-spacing: 2px;
+  margin :0px;
+   justify-content: flex-start;
+  font-size: 20px;
+}
+#od-meta{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+  padding-left:19px ;
+}
+.fa-check-square{
+  color: green;
+}
+.fa-trash{
+  color: rgb(72, 15, 15);
+} 
+#od-meta span{
+  background-color:#333641;
+  border-radius: 6px ;
+  width: 150PX;
+  padding-left: 4PX;
+}
+
+#btn-con:hover{
+  background-color: #054f10;
+  color: #ffffff;
+  border-color: #3b82f6;
+transform: scale(1.05);
+}
+#btn-del:hover{
+  background-color: #810e0e;
+  color: #ffffff;
+  border-color: #3b82f6;
+transform: scale(1.05);
+}
+/*==================admin============*/
+#adm-txt{
+  background-color: #1a223b;
+}
+#dash-adm{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+#dash-adm h1{
+  background-color: #373d44;
+  width: 360px;
+  border-radius: 3px;
+  font-size: 70px;
+  text-align: center;
+}
